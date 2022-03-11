@@ -12,21 +12,17 @@ const person: TPerson = {
 }
 
 const persons: TPerson[] = [
-    { id: 1, name: "Dat", age: 20, status: true},
-    { id: 2, name: "Kien", age: 22, status: false},
+    { id: 1, name: "Dat", age: 20, status: true },
+    { id: 2, name: "Kien", age: 22, status: false },
 ]
 
-
-
-const show = ():void => {
+const show1 = (): void => {
     console.log()
 }
 
-const arrString: string[] = ["1","2","3"];
-const arrNumber: number[] = [1,2,3];
+const arrString: string[] = ["1", "2", "3"];
+const arrNumber: number[] = [1, 2, 3];
 console.log(person.name);
-
-
 
 type AppProps = {
     message: string
@@ -36,4 +32,9 @@ const DemoApp = (props: AppProps) => {
     console.log(props)
 }
 
-DemoApp({message: "Hello"})
+DemoApp({ message: "Hello" })
+
+function show<T, U>(a: T, b: U): [T, U] {
+    return [a,b];
+}
+show(10,"Dat");
