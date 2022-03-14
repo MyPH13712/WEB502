@@ -1,31 +1,49 @@
 import { useEffect, useState } from 'react'
-import './App.css'
-import ShowInfo from './components/ShowInfo'
-import type { ProductType } from './types/product';
 import axios from 'axios';
+import './App.css'
+import { list, remove } from './api/product';
+import type { ProductType } from './types/product';
 
 function App() {
-  const [info, setInfo] = useState<ProductType>({
-    name: "My",
-    age: 20
-  })
-
   const [products, setProducts] = useState<ProductType[]>([]);
-  const [count, setCount] = useState<number>(0);
+  // const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     const getProducts = async () => {
-      const { data } = await axios.get('http://localhost:8000/api/products');
+      const { data } = await list();
       setProducts(data);
     }
     getProducts();
   }, [])
+
+  const removeItem = async (id: number) => {
+    // xoa tren API
+    const { data } = await remove(id);
+    // reRender
+    data && setProducts(products.filter(item => item._id !== data._id));
+  }
+
   return (
     <div className="App">
-      {count} <button onClick={() => setCount(count + 1)}>Click</button>
-      <ShowInfo info={info} />
-      <hr />
-      {products.map(item => <div>{item.name}</div>)}
+      <table>
+        <thead>
+          <th>#</th>
+          <th>Name</th>
+          <th></th>
+        </thead>
+        <tbody>
+          {products.map((item, index) => {
+            return <tr>
+              <td>{index + 1}</td>
+              <td>{item.name}</td>
+              <td>
+                <button onClick={() => removeItem(item._id)}>Remove</button>
+              </td>
+            </tr>
+          })}
+        </tbody>
+      </table>
+
     </div>
   )
 }
