@@ -18,7 +18,7 @@ function App() {
     // xoa tren API
     const { data } = await remove(id);
     // reRender
-    data && setProducts(products.filter(item => item._id !== data._id));
+    data && setProducts(products.filter(item => item.id !== data.id));
   }
   return (
     <div className="App">
@@ -34,7 +34,7 @@ function App() {
               <td>{index + 1}</td>
               <td>{item.name}</td>
               <td>
-                <button onClick={() => removeItem(item._id)}>Remove</button>
+                <button onClick={() => removeItem(item.id)}>Remove</button>
               </td>
             </tr>
           })}
