@@ -1,10 +1,12 @@
 {
     "products": [
         {
+            "id": 1,
             "name":"My",
             "age": 20
         },
         {
+            "id": 2,
             "name":"Dat",
             "age": 22
         }

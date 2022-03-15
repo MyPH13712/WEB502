@@ -11,5 +11,4 @@ const ShowInfo = (props: ShowInfoProps) => {
     </div>
   )
 }
-
 export default ShowInfo
