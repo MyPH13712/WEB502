@@ -29,50 +29,21 @@ function App() {
     data && setProducts(products.filter(item => item._id !== data._id));
   }
   return (
-    <div className="App">
-      {/* <table>
-        <thead>
-          <th>#</th>
-          <th>Name</th>
-          <th></th>
-        </thead>
-        <tbody>
-          {products && products.map((item, index) => {
-            return <tr>
-                    <td>{index + 1}</td>
-                    <td>{item.name}</td>
-                    <td>
-                      <button onClick={() => removeItem(item._id)}>Remove</button>
-                    </td>
-                  </tr>
-          })}
-        </tbody>
-      </table> */}
-      <header>
-        <ul>
-          <li><NavLink to="/">Home Page</NavLink></li>
-          <li><NavLink to="/product">Product Page</NavLink></li>
-          <li><NavLink to="/admin/dashboard">Admin Dashboard</NavLink></li>
-        </ul>
-      </header>
-      <main>
-        <Routes>
-          {/* <Route path="/" element= {<h1>Home </h1>} />
+    <Routes>
+      {/* <Route path="/" element= {<h1>Home </h1>} />
           <Route path="product" element= {<h1>Product</h1>} />
           <Route path="about" element = {<h1>About </h1>}/> */}
-          <Route path="/" element={<WebsiteLayout />} >
-            <Route index element={<Home />} />
-            <Route path="product" element={<Product />} />
-          </Route>
-          <Route path="admin" element={<AdminLayout />}>
-            <Route index element={<Navigate to="dashboard" />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="product" element={<ManagerProduct />} />
-          </Route>
-        </Routes>
+      <Route path="/" element={<WebsiteLayout />} >
+        <Route index element={<Home />} />
+        <Route path="product" element={<Product />} />
+      </Route>
+      <Route path="admin" element={<AdminLayout />}>
+        <Route index element={<Navigate to="dashboard" />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="product" element={<ManagerProduct />} />
+      </Route>
+    </Routes>
 
-      </main>
-    </div>
   )
 }
 export default App
