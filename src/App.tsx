@@ -14,20 +14,19 @@ import ManagerProduct from './pages/ManagerProduct';
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   // const [count, setCount] = useState<number>(0);
-  useEffect(() => {
+  useEffect(() => { // 3
     const getProducts = async () => {
-      const { data } = await list();
-      setProducts(data);
+       const { data } = await list();
+       setProducts(data);
     }
     getProducts();
-  }, [])
-
-  const removeItem = async (id: number) => {
-    // xoa tren API
-    const { data } = await remove(id);
-    // reRender
-    data && setProducts(products.filter(item => item._id !== data._id));
-  }
+ },[])
+ const removeItem = async (id: number) => {
+   // xoa tren API
+   const { data } = await remove(id);
+   // reRender
+   data && setProducts(products.filter(item => item._id !== data._id));
+ }
   return (
     <Routes>
       {/* <Route path="/" element= {<h1>Home </h1>} />
