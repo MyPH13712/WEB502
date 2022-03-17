@@ -8,7 +8,7 @@ const AdminLayout = (props: Props) => {
   return (
     <div>
         <header>
-            <Header />
+            Admin Header
         </header>
         <aside>
             Menu Admin
