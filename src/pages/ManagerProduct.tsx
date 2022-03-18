@@ -21,12 +21,9 @@ const ManagerProduct = (props: ManagerProductProps) => {
                 return <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{item.name}</td>
-                        <td>
-                        {/* <button onClick={() => removeItem(item._id)}>Remove</button> */}
-                        </td>
+                        <td></td>
                     </tr>
             })}
-
             </tbody>
       </table>
     </div>
