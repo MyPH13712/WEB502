@@ -4,7 +4,7 @@ import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import ShowInfo from './components/ShowInfo'
 import type { ProductType } from './types/product';
-import { list, remove } from './api/product';
+import { add, list, remove } from './api/product';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import WebsiteLayout from './pages/layouts/WebsiteLayout';
 import Home from './pages/Home';
@@ -29,6 +29,11 @@ function App() {
     // reRender
     data && setProducts(products.filter(item => item._id !== data._id));
   }
+  const onHandleAdd = async (product: ProductType) => {
+    console.log('app.js', product);
+    const {data } = await add(product);
+    setProducts([...products, data])
+  }
   return (
     <Routes>
       <Route path="/" element={<WebsiteLayout />}>
@@ -39,7 +44,7 @@ function App() {
         <Route index element={<Navigate to="dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="product" element={<ManagerProduct data={products} />} />
-        <Route path="/admin/product/add" element={<ProductAdd />}/>
+        <Route path="/admin/product/add" element={<ProductAdd onAdd={onHandleAdd}/>}/>
       </Route>
     </Routes>
 
