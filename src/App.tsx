@@ -12,6 +12,7 @@ import Product from './pages/Product';
 import AdminLayout from './pages/layouts/AdminLayout';
 import Dashboard from './pages/Dashboard';
 import ManagerProduct from './pages/ManagerProduct';
+import ProductAdd from './pages/ProductAdd';
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   // const [count, setCount] = useState<number>(0);
@@ -38,6 +39,7 @@ function App() {
         <Route index element={<Navigate to="dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="product" element={<ManagerProduct data={products} />} />
+        <Route path="/admin/product/add" element={<ProductAdd />}/>
       </Route>
     </Routes>
 
