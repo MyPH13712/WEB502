@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios';
 import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css"
-import ShowInfo from './components/ShowInfo'
 import type { ProductType } from './types/product';
 import { add, list, remove } from './api/product';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
@@ -31,7 +29,7 @@ function App() {
   }
   const onHandleAdd = async (product: ProductType) => {
     console.log('app.js', product);
-    const { data } = await add(product);
+    const {data } = await add(product);
     setProducts([...products, data])
   }
   return (
@@ -44,7 +42,7 @@ function App() {
         <Route index element={<Navigate to="dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="product" element={<ManagerProduct data={products} />} />
-        <Route path="/admin/product/add" element={<ProductAdd onAdd={onHandleAdd} />} />
+        <Route path="/admin/product/add" element={<ProductAdd onAdd={onHandleAdd}/>}/>
       </Route>
     </Routes>
 
