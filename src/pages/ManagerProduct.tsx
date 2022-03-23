@@ -7,8 +7,8 @@ type ManagerProductProps = {
 
 const ManagerProduct = (props: ManagerProductProps) => {
   return (
-    <div>
-        <table>
+    <div className="container">
+        <table className="table table-bordered">
             <thead>
                 <tr>
                     <th>#</th>
