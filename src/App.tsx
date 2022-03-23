@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import type { ProductType } from './types/product';
-import { add, list, remove } from './api/product';
+import { add, list, remove, update } from './api/product';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import WebsiteLayout from './pages/layouts/WebsiteLayout';
 import Home from './pages/Home';
@@ -11,6 +11,7 @@ import AdminLayout from './pages/layouts/AdminLayout';
 import Dashboard from './pages/Dashboard';
 import ManagerProduct from './pages/ManagerProduct';
 import ProductAdd from './pages/ProductAdd';
+import ProductEdit from './pages/ProductEdit';
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   // const [count, setCount] = useState<number>(0);
@@ -21,16 +22,21 @@ function App() {
     }
     getProducts();
   }, [])
-  const removeItem = async (id: number) => {
+  const onHandleRemove = async (id: number) => {
     // xoa tren API
-    const { data } = await remove(id);
+    await remove(id);
     // reRender
-    data && setProducts(products.filter(item => item._id !== data._id));
+    setProducts(products.filter(item => item.id !== id));
   }
   const onHandleAdd = async (product: ProductType) => {
     console.log('app.js', product);
     const {data } = await add(product);
     setProducts([...products, data])
+  }
+  const onHandleUpdate = async (product:ProductType) => {
+    console.log(product);
+    const {data } = await update(product);
+    setProducts(products.map(item => item.id == data.id ? data : item));
   }
   return (
     <Routes>
@@ -41,8 +47,11 @@ function App() {
       <Route path="admin" element={<AdminLayout />}>
         <Route index element={<Navigate to="dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="product" element={<ManagerProduct data={products} />} />
-        <Route path="/admin/product/add" element={<ProductAdd onAdd={onHandleAdd}/>}/>
+        <Route path="product">
+          <Route index element={<ManagerProduct data={products} onRemove={onHandleRemove}/>} />
+          <Route path="add" element={<ProductAdd onAdd={onHandleAdd}/>} />
+          <Route path=":id/edit" element={<ProductEdit onUpdate={onHandleUpdate}/>} />
+        </Route>
       </Route>
     </Routes>
 
