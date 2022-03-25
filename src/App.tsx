@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard';
 import ManagerProduct from './pages/ManagerProduct';
 import ProductAdd from './pages/ProductAdd';
 import ProductEdit from './pages/ProductEdit';
+import PrivateRouter from './components/PrivateRouter';
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   // const [count, setCount] = useState<number>(0);
@@ -44,7 +45,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="product" element={<Product />} />
       </Route>
-      <Route path="admin" element={<AdminLayout />}>
+      <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
         <Route index element={<Navigate to="dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="product">
