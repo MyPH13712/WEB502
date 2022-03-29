@@ -3,7 +3,6 @@ import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import type { ProductType } from './types/product';
 import { add, list, remove, update } from './api/product';
-import {login } from './api/user'
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import WebsiteLayout from './pages/layouts/WebsiteLayout';
 import Home from './pages/Home';
@@ -14,11 +13,10 @@ import ManagerProduct from './pages/ManagerProduct';
 import ProductAdd from './pages/ProductAdd';
 import ProductEdit from './pages/ProductEdit';
 import PrivateRouter from './components/PrivateRouter';
-import Login from './pages/Login';
-import { UserType } from './types/user';
+import Signup from './pages/Signup';
+import Signin from './pages/Signin';
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
-  const [users, setUsers] = useState<UserType[]>([]);
 
   useEffect(() => { // 3
     const getProducts = async () => {
@@ -39,11 +37,6 @@ function App() {
     setProducts([...products, data])
   }
 
-  const onHandleAddUser = async (user: UserType) => {
-    console.log('app.js', user);
-    const { data } = await login(user);
-    setProducts([...products, data])
-  } 
   const onHandleUpdate = async (product: ProductType) => {
     console.log(product);
     const { data } = await update(product);
@@ -54,7 +47,8 @@ function App() {
       <Route path="/" element={<WebsiteLayout />}>
         <Route index element={<Home />} />
         <Route path="product" element={<Product />} />
-        <Route path="login" element={<Login onAdd={onHandleAddUser}/>} />
+        <Route path="signup" element={<Signup />} />
+        <Route path="signin" element={<Signin />} />
       </Route>
       <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
         <Route index element={<Navigate to="dashboard" />} />
