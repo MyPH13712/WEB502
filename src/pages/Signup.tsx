@@ -13,14 +13,14 @@ const Signup = () => {
   const navigate = useNavigate();
   const onSubmit: SubmitHandler<FormValues> = (data) => {
       signup(data);
-      navigate("/sigin");
+      navigate("/signin");
   }
 return (
   <div>
       <form onSubmit={handleSubmit(onSubmit)}>
           <input type="text" {...register('name', { required: true, minLength: 5})}/>
-          {errors.name && errors.name.type === "required" && <span>Required</span>}
-          {errors.name && errors.name.type === "minLength" && <span>Min length</span>}
+          {/* {errors.name && errors.name.type === "required" && <span>Required</span>}
+          {errors.name && errors.name.type === "minLength" && <span>Min length</span>} */}
           <input type="email" {...register('email', { required: true})}/>
           <input type="password" {...register('password')}/>
           <button>Add</button>
